@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <h1>Users</h1>
+    <ul id="users">
+        <% users.forEach(function(user){ %>
+            <li>
+                <%= user.name %> &lt;<%= user.email %>&gt;
+            </li>
+            <% }) %>
+    </ul>
+</body>
+
+</html>
