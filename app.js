@@ -8,6 +8,7 @@ import express from 'express';
 import passport from 'passport';
 import cookieSession from 'cookie-session';
 import './passport.js';
+import cors from 'cors';
 
 import authRoute from "./src/auth/AuthRoute.js";
 import viewsRoute from "./src/views/views.js";
@@ -16,15 +17,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const app = express();
 
+// Global middlewares
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // view engine setup
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.renderFile);
 app.set('view engine', 'html');
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 
 // Google
 app.use(cookieSession({
@@ -61,7 +63,8 @@ app.get('/google-auth/callback/success', async (req, res) => {
         body: JSON.stringify({
             name: req.user.displayName,
             email: req.user.email
-        })
+        }),
+        mode: 'cors'
     });
 
     const result = await response.json();

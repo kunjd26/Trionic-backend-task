@@ -108,11 +108,10 @@ class AuthController {
                             res.status(500).send({ "error": { "message": "Internal server error." } });
                         }
                     });
-
-                    let jwt = generateJWT(rows[0]);
-                    res.setHeader("Authorization", `Bearer ${jwt}`);
-                    res.status(200).send({ "data": { "message": "User sign-in with google successfully." } });
                 }
+                let jwt = generateJWT(rows[0]);
+                res.setHeader("Authorization", `Bearer ${jwt}`);
+                res.status(200).send({ "data": { "message": "User sign-in with google successfully." } });
                 conn.end();
             });
         } catch (error) {
