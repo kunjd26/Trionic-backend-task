@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add events</title>
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #4285F4;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #4CAF50;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/events/show">Show Events</a>
+        <a href="/events/add">Create Event</a>
+        <a href="/events/update">Update Event</a>
+        <a href="/events/delete">Delete Event</a>
+        <a href="/sign-out">Sign out</a>
+    </div>
+
+    <h1>Add events</h1>
+    <p>
+        <%= email %>
+    </p>
+
+    <form onsubmit="handleSubmit(event)">
+        <label for="title" style="display: block; margin-bottom: 5px;">Title:</label>
+        <input type="text" id="title" name="title" required style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <label for="description" style="display: block; margin-bottom: 5px;">Description:</label>
+        <textarea id="description" name="description" required
+            style="margin-bottom: 15px; width: 25%; padding: 10px; resize: vertical;"></textarea>
+        <label for="seats" style="display: block; margin-bottom: 5px;">Seat:</label>
+        <input type="number" id="seats" name="seats" required
+            style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <label for="date" style="display: block; margin-bottom: 5px;">Date:</label>
+        <input type="date" id="date" name="date" required style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <input type="submit" value="Submit"
+            style="background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+    </form>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            var title = document.getElementById('title').value;
+            var description = document.getElementById('description').value;
+            var seats = document.getElementById('seats').value;
+            var date = document.getElementById('date').value;
+
+
+        }
+    </script>
+</body>
+
+</html>

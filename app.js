@@ -12,6 +12,7 @@ import cors from 'cors';
 
 import authRoute from "./src/auth/AuthRoute.js";
 import viewsRoute from "./src/views/views.js";
+import eventRoute from "./src/event/EventRoute.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -55,7 +56,7 @@ app.get('/google-auth/callback/success', async (req, res) => {
         res.redirect('/google-auth/callback/failure');
     }
 
-    const response = await fetch('http://localhost:65535/api/auth/google-auth', {
+    const response = await fetch(`http://${process.env.HOST}:${process.env.PORT}/api/auth/google-auth`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -89,6 +90,7 @@ app.get('/google-auth/callback/failure', (req, res) => {
 
 app.use("/", viewsRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/events", eventRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

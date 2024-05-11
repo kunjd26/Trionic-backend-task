@@ -8,6 +8,15 @@ export default function verifyJWT(req, res, next) {
 
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         if (verified) {
+
+            // Put token in response header
+            res.header("Authorization", `Bearer ${token}`);
+
+            // Decode the token to get the payload
+            const payload = jwt.decode(token);
+
+            req.body.id = payload.id
+
             next();
         } else {
             res.status(401).send({ "error": { "message": "Invalid token." } });
