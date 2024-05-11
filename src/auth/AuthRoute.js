@@ -5,11 +5,13 @@ import validateSignupRequest from "./requests/SignupRequest.js";
 import validateSigninRequest from "./requests/SigninRequest.js";
 import verifyJWT from "./middlewares/VerifyJWT.js";
 import checkRateLimit from "./middlewares/CheckRateLimit.js";
+import checkEmailWithoutThirdParty from "./middlewares/CheckEmailWithoutThirdParty.js";
 
 const router = express.Router();
 
-router.route("/sign-up").post([validateSignupRequest, checkEmailExists], authController.signUp);
-router.route("/sign-in").post([validateSigninRequest, checkRateLimit], authController.signIn);
+router.route("/sign-up").post([validateSignupRequest, checkEmailExists], authController.signup);
+router.route("/sign-in").post([validateSigninRequest, checkEmailWithoutThirdParty, checkRateLimit], authController.signin);
 router.route("/sign-out").post();
+router.route("/google-auth").post(authController.googleAuth);
 
 export default router;

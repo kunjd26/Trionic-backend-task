@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import passport from 'passport';
+import cookieSession from 'cookie-session';
+import './passport.js';
+
 const app = express();
-const passport = require('passport');
-const cookieSession = require('cookie-session');
-require('./passport');
 
 app.use(cookieSession({
     name: 'google-auth-session',
@@ -13,34 +14,34 @@ app.use(passport.session());
 
 
 app.get('/', (req, res) => {
-    res.send("<button><a href='/auth'>Login With Google</a></button>")
+    res.send("<button><a href='/google-auth'>Login With Google</a></button>")
 });
 
 // Auth 
-app.get('/auth', passport.authenticate('google', {
+app.get('/google-auth', passport.authenticate('google', {
     scope:
         ['email', 'profile']
 }));
 
 // Auth Callback 
-app.get('/auth/callback',
+app.get('/google-auth/callback',
     passport.authenticate('google', {
-        successRedirect: '/auth/callback/success',
-        failureRedirect: '/auth/callback/failure'
+        successRedirect: '/google-auth/callback/success',
+        failureRedirect: '/google-auth/callback/failure'
     }));
 
 // Success 
-app.get('/auth/callback/success', (req, res) => {
+app.get('/google-auth/callback/success', (req, res) => {
     if (!req.user)
-        res.redirect('/auth/callback/failure');
+        res.redirect('/google-auth/callback/failure');
     console.log(req.user)
     res.send("Welcome " + req.user.displayName);
 });
 
 // failure 
-app.get('/auth/callback/failure', (req, res) => {
+app.get('/google-auth/callback/failure', (req, res) => {
     res.send("Error");
-})
+});
 
 app.listen(65535, () => {
     console.log("Server Running on port 65535");

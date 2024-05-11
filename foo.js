@@ -7,13 +7,13 @@ import nodemailer from 'nodemailer';
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'd23cs097@charusat.edu.in',
-        pass: 'vnzn bfsj fzwt zypj '
+        user: process.env.EMAIL_ID,
+        pass: process.env.EMAIL_PASSWORD
     }
 });
 
 var mailOptions = {
-    from: 'd23cs097@charusat.edu.in',
+    from: process.env.EMAIL_ID,
     to: 'kunjd26@gmail.com',
     subject: 'OTP for verification',
     text: 'That was easy!'

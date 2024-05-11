@@ -5,7 +5,7 @@ import "dotenv/config";
 import generateJWT from "./services/GenerateJWT.js";
 
 class AuthController {
-    signUp(req, res) {
+    signup(req, res) {
         try {
             const { name, email, password } = req.body;
 
@@ -33,7 +33,7 @@ class AuthController {
         }
     }
 
-    signIn(req, res) {
+    signin(req, res) {
         try {
             const { email, password } = req.body;
 
@@ -79,6 +79,42 @@ class AuthController {
                 conn.end();
             });
 
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ "error": { "message": "Internal server error." } });
+        }
+    }
+
+    googleAuth(req, res) {
+        try {
+            const { email, name } = req.body;
+
+            let sql = "SELECT count(*) AS row_count, email, id FROM users WHERE email = ?";
+            let values = [email];
+
+            const conn = mysql.createConnection(connection);
+
+            conn.execute(sql, values, (error, rows) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).send({ "error": { "message": "Internal server error." } });
+                } else if (rows[0].row_count == 0) {
+                    sql = "INSERT INTO users (name, email, third_party) VALUES (?, ?, ?)";
+                    values = [name, email, 1];
+
+                    conn.execute(sql, values, (error) => {
+                        if (error) {
+                            console.log(error);
+                            res.status(500).send({ "error": { "message": "Internal server error." } });
+                        }
+                    });
+
+                    let jwt = generateJWT(rows[0]);
+                    res.setHeader("Authorization", `Bearer ${jwt}`);
+                    res.status(200).send({ "data": { "message": "User sign-in with google successfully." } });
+                }
+                conn.end();
+            });
         } catch (error) {
             console.log(error);
             res.status(500).send({ "error": { "message": "Internal server error." } });

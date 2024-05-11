@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up page</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+    <h2 style="color: #333;">Sign up</h2>
+
+    <p id="error-message" style="color: red;"></p>
+
+    <form onsubmit="signup(event)">
+        <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+        <input type="text" id="name" name="name" required style="margin-bottom: 15px; width: 25%; padding: 10px;">
+
+        <label for="email" style="display: block; margin-bottom: 5px;">Email:</label>
+        <input type="email" id="email" name="email" required style="margin-bottom: 15px; width: 25%; padding: 10px;">
+
+        <label for="password" style="display: block; margin-bottom: 5px;">Password:</label>
+        <input type="password" id="password" name="password" required
+            style="margin-bottom: 15px; width: 25%; padding: 10px;">
+
+        <label for="confirmPassword" style="display: block; margin-bottom: 5px;">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required
+            style="margin-bottom: 20px; width: 25%; padding: 10px;">
+        <br>
+        <input type="submit" value="Sign up"
+            style="background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+    </form>
+
+    <button onclick="continueWithGoogle()"
+        style="background-color: #4285F4; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Continue
+        with Google</button>
+
+    <p>Already have an account? <a href="/sign-in">Sign in</a></p>
+
+    <script>
+        async function signup(event) {
+            event.preventDefault();
+            let form = event.target;
+            let formData = new FormData(form);
+
+            let name = formData.get('name');
+            let email = formData.get('email');
+            let password = formData.get('password');
+            let confirmPassword = formData.get('confirmPassword');
+
+            const response = await fetch('/api/auth/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                })
+            });
+
+            const result = await response.json();
+            if (!result.error) {
+                alert('Sign up successful');
+                window.location.href = '/sign-in';
+            } else {
+                document.getElementById('error-message').innerText = result.error.message;
+            }
+        }
+
+        function continueWithGoogle() {
+            window.location.href = '/google-auth';
+        }
+    </script>
+</body>
+
+</html>

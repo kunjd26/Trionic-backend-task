@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
     "mysql2": "^3.9.1",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.13",
     "passport": "^0.5.3",
     "passport-google-oauth2": "^0.2.0",
