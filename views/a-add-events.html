@@ -40,6 +40,8 @@
     <p>
         <%= email %>
     </p>
+    <p id="error-message" style="color: red;"></p>
+    <p id="success-message" style="color: green;"></p>
 
     <form onsubmit="handleSubmit(event)">
         <label for="title" style="display: block; margin-bottom: 5px;">Title:</label>
@@ -57,14 +59,36 @@
     </form>
 
     <script>
-        function handleSubmit(event) {
+        async function handleSubmit(event) {
             event.preventDefault();
 
-            var title = document.getElementById('title').value;
-            var description = document.getElementById('description').value;
-            var seats = document.getElementById('seats').value;
-            var date = document.getElementById('date').value;
+            let title = document.getElementById('title').value;
+            let description = document.getElementById('description').value;
+            let seats = document.getElementById('seats').value;
+            let date = document.getElementById('date').value;
 
+            const response = await fetch(`/api/events/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: '<%= email %>',
+                    title: title,
+                    description: description,
+                    seats: seats,
+                    date, date
+                }),
+                mode: 'cors'
+            });
+
+            const result = await response.json();
+
+            if (result.error) {
+                document.getElementById('error-message').innerText = result.error.message;
+            } else {
+                document.getElementById('success-message').innerText = "Event created successfully.";
+            }
 
         }
     </script>

@@ -9,7 +9,7 @@ router.route("/events/show").get(async function (req, res) {
         res.redirect('/');
     } else if (req.session.user.role === 'admin') {
 
-        const response = await fetch(`http://${process.env.HOST}:${process.env.PORT}/api/events/`, {
+        const response = await fetch(`http://${process.env.HOST}:${process.env.PORT}/api/events/show`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ router.route("/events/show").get(async function (req, res) {
         }
         res.render("a-show-events", {
             email: req.session.user.email,
-            events: result
+            events: result.data
         });
     }
 });

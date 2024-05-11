@@ -40,6 +40,51 @@
     <p>
         <%= email %>
     </p>
-</body>
+    <p id="error-message" style="color: red;"></p>
+    <p id="success-message" style="color: green;"></p>
 
-</html>
+    <form id="form0" onsubmit="handleSubmit(event)">
+        <label for="id" style="display: block; margin-bottom: 5px;">ID:</label>
+        <input type="number" id="id" name="id" required style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <input type="text" id="confirm" name="confirm" required style="margin-bottom: 15px; width: 25%; padding: 10px;"
+            placeholder="Type confirm"><br>
+        <input type="submit" value="Submit"
+            style="background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+    </form>
+
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            let id = document.getElementById('id').value;
+            let confirm = document.getElementById('confirm').value.toLowerCase();
+
+            if (confirm == "confirm") {
+                const response = await fetch(`/api/events/delete/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: '<%= email %>'
+                    }),
+                    mode: 'cors'
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    console.log(result.error);
+                }
+
+                if (result.error) {
+                    document.getElementById('error-message').innerText = result.error.message;
+                } else {
+                    document.getElementById('success-message').innerText = "Event deleted successfully.";
+                }
+            } else {
+                document.getElementById('error-message').innerText = "Type confirm to delete event.";
+            }
+        }
+    </script>
+</body>

@@ -21,7 +21,7 @@ const schema = Joi.object({
     }),
 });
 
-export default function addEventsRequest(req, res, next) {
+export default function addOrUpdateEventsRequest(req, res, next) {
 
     try {
         const { error } = schema.validate(req.body);

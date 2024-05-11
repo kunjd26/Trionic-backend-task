@@ -40,11 +40,42 @@
     <p>
         <%= email %>
     </p>
+    <div style="font-family: Arial, sans-serif; width: 50%;">
 
+        <% if(events.length> 0) { %>
+            <% events.forEach(function(event) { %>
+                <div style="border: 1px solid #000; margin-bottom: 10px; padding: 10px;">
+                    <h2 style="color: #333;">Event Name: <%= event.title %>
+                    </h2>
+                    <p style="color: #666;">Event id:
+                        <span id="eventId<%= event.id %>">
+                            <%= event.id %>
+                        </span>
+                        <img src="copy-icon.png" alt="Copy" style="cursor: pointer;"
+                            onclick="copyToClipboard('<%= event.id %>')">
+                    </p>
+                    <p style="color: #666;">
+                        Event Seats: <%= event.total_seats %><br>
+                            Available Seats: <%= event.available_seats %><br>
+                                Event Location: <%= event.description %><br>
+                                    Event Date: <%= event.date.split('T')[0] %><br>
+                    </p>
+                </div>
+                <% }); %>
+                    <% } else { %>
+                        <p style="color: red;">No events found.</p>
+                        <% } %>
+
+    </div>
     <script>
-        window.addEventListener('DOMContentLoaded', function () {
-
-        });
+        function copyToClipboard(id) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById('eventId' + id));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+        }
     </script>
 </body>
 

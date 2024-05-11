@@ -40,6 +40,102 @@
     <p>
         <%= email %>
     </p>
-</body>
+    <p id="error-message" style="color: red;"></p>
+    <p id="success-message" style="color: green;"></p>
 
-</html>
+    <form id="form0" onsubmit="handleSubmit(event)">
+        <label for="id" style="display: block; margin-bottom: 5px;">ID:</label>
+        <input type="number" id="id" name="id" required style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <input type="submit" value="Submit"
+            style="background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+    </form>
+    <br>
+    <form id="form1" onsubmit="handleSubmit1(event)" style="display: none;">
+        <label for="title" style="display: block; margin-bottom: 5px;">Title:</label>
+        <input type="text" id="title" name="title" required style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <label for="description" style="display: block; margin-bottom: 5px;">Description:</label>
+        <textarea id="description" name="description" required
+            style="margin-bottom: 15px; width: 25%; padding: 10px; resize: vertical;"></textarea>
+        <label for="seats" style="display: block; margin-bottom: 5px;">Seat:</label>
+        <input type="number" id="seats" name="seats" required
+            style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <label for="date" style="display: block; margin-bottom: 5px;">Date:</label>
+        <input type="date" id="date" name="date" required style="margin-bottom: 15px; width: 25%; padding: 10px;"><br>
+        <input type="submit" value="Submit"
+            style="background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+    </form>
+
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            let id = document.getElementById('id').value;
+
+            const response = await fetch(`/api/events/show/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: '<%= email %>'
+                }),
+                mode: 'cors'
+            });
+
+            const result = await response.json();
+
+            if (result.error) {
+                console.log(result.error);
+            }
+
+            if (result.error) {
+                document.getElementById('error-message').innerText = result.error.message;
+            } else {
+                document.getElementById('form0').style.display = "none";
+                document.getElementById('form1').style.display = 'block';
+                document.getElementById('title').value = result.data[0].title;
+                document.getElementById('description').value = result.data[0].description;
+                document.getElementById('date').value = result.data[0].date.split('T')[0];
+                document.getElementById('seats').value = result.data[0].total_seats;
+            }
+        }
+
+        async function handleSubmit1(event) {
+            event.preventDefault();
+
+            let title = document.getElementById('title').value;
+            let description = document.getElementById('description').value;
+            let seats = document.getElementById('seats').value;
+            let date = document.getElementById('date').value;
+            let id = document.getElementById('id').value;
+
+            const response = await fetch(`/api/events/update/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: '<%= email %>',
+                    title: title,
+                    description: description,
+                    seats: seats,
+                    date, date
+                }),
+                mode: 'cors'
+            });
+
+            const result = await response.json();
+
+            if (result.error) {
+                document.getElementById('error-message').innerText = result.error.message;
+                document.getElementById('success-message').innerText = "";
+            } else {
+                document.getElementById('success-message').innerText = "Event updated successfully.";
+                document.getElementById('form0').style.display = "block";
+                document.getElementById('form1').style.display = 'none';
+                document.getElementById('error-message').innerText = ""
+            }
+
+        }
+    </script>
+</body>
