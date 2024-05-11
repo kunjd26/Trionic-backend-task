@@ -32,7 +32,7 @@
 
             let email = formData.get('email');
             let password = formData.get('password');
-            let role = 'normal';
+            let role = 'admin';
 
             const response = await fetch('/api/auth/sign-in', {
                 method: 'POST',
