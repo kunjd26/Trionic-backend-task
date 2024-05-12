@@ -13,7 +13,7 @@ const schema = Joi.object({
         "number.base": "Seats must be a number.",
         "any.required": "Seats is required."
     })
-});
+}).unknown(true);
 
 export default function bookEventsRequest(req, res, next) {
 

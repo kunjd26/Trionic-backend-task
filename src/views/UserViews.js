@@ -15,20 +15,23 @@ router.route("/events/show").get(async function (req, res) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: req.session.user.email
+                email: req.session.user.email,
+                token: req.session.user.token
             }),
             mode: 'cors'
         });
 
         const result = await response.json();
 
-        if (result.error) {
+        if (!result.error) {
+            res.render("n-show-events", {
+                email: req.session.user.email,
+                events: result.data,
+                token: req.session.user.token
+            });
+        } else {
             console.log(result.error);
         }
-        res.render("n-show-events", {
-            email: req.session.user.email,
-            events: result.data
-        });
     }
 });
 
@@ -45,20 +48,23 @@ router.route("/events/history").get(async function (req, res) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: req.session.user.email
+                email: req.session.user.email,
+                token: req.session.user.token
             }),
             mode: 'cors'
         });
 
         const result = await response.json();
 
-        if (result.error) {
+        if (!result.error) {
+            res.render("n-history-events", {
+                email: req.session.user.email,
+                events: result.data,
+                token: req.session.user.token
+            });
+        } else {
             console.log(result.error);
         }
-        res.render("n-history-events", {
-            email: req.session.user.email,
-            events: result.data
-        });
     }
 });
 

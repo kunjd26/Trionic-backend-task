@@ -5,7 +5,7 @@ const schema = Joi.object({
         "string.email": "Email must be a valid email address.",
         "any.required": "Email is required."
     })
-});
+}).unknown(true);
 
 export default function showEventsRequest(req, res, next) {
 

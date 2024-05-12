@@ -24,6 +24,7 @@ router.route("/sign-in").post(function (req, res) {
     req.session.user = {
         email: req.body.email,
         role: req.body.role,
+        token: req.body.token
     };
 
     res.status(200).send({ "data": { "message": "Session created." } });
@@ -46,7 +47,8 @@ router.route("/admin/sign-in").post(function (req, res) {
     // Generate express session
     req.session.user = {
         email: req.body.email,
-        role: req.body.role
+        role: req.body.role,
+        token: req.body.token
     };
 
     res.status(200).send({ "data": { "message": "Session created." } });
@@ -59,12 +61,14 @@ router.route("/").get(function (req, res) {
     } else if (req.session.user.role === 'normal') {
         res.render("home", {
             email: req.session.user.email,
-            id: req.session.user.id
+            id: req.session.user.id,
+            token: req.session.user.token
         });
     } else if (req.session.user.role === 'admin') {
         res.render("a-home", {
             email: req.session.user.email,
-            id: req.session.user.id
+            id: req.session.user.id,
+            token: req.session.user.token
         });
     }
 });

@@ -80,7 +80,8 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: '<%= email %>'
+                    email: '<%= email %>',
+                    token: '<%= token %>'
                 }),
                 mode: 'cors'
             });
@@ -121,7 +122,8 @@
                     title: title,
                     description: description,
                     seats: seats,
-                    date, date
+                    date: date,
+                    token: '<%= token %>'
                 }),
                 mode: 'cors'
             });

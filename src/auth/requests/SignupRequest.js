@@ -24,7 +24,7 @@ const schema = Joi.object({
             'any.only': 'Confirm password does not match with password',
             'any.required': 'Confirm password is required.'
         })
-});
+}).unknown(true);
 
 export default function validateSignupRequest(req, res, next) {
 

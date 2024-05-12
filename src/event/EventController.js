@@ -100,7 +100,7 @@ class EventController {
             const { email, title, description, date, seats } = req.body;
             const { id } = req.params;
 
-            let sql = "SELECT total_seats, available_seats, sum(number_of_seats) AS booked_seats FROM events INNER JOIN user_event ON events.id = user_event.event_id WHERE events.id = ? AND created_by = (SELECT id FROM users WHERE email = ?)"
+            let sql = "SELECT total_seats, available_seats, sum(number_of_seats) AS booked_seats FROM events LEFT JOIN user_event ON events.id = user_event.event_id WHERE events.id = ? AND created_by = (SELECT id FROM users WHERE email = ?)"
             let values = [id, email];
 
             const conn = mysql.createConnection(connection);
@@ -110,14 +110,18 @@ class EventController {
                     console.log(error);
                     res.status(500).send({ "error": { "message": "Internal server error." } });
                 } else {
-                    let total_seats, available_seats;
-                    if (rows[0].booked_seats == 0) {
-                        total_seats = seats;
-                        available_seats = seats;
-                    } else if (seats >= parseInt(rows[0].booked_seats, 10)) {
-                        total_seats = seats;
-                        available_seats = seats - rows[0].booked_seats;
-
+                    rows[0].booked_seats = rows[0].booked_seats ? parseInt(rows[0].booked_seats, 10) : 0;
+                    if (seats < rows[0].booked_seats) {
+                        res.status(422).send({ "error": { "message": "Total seats less than already booked seats." } });
+                    } else {
+                        let total_seats, available_seats;
+                        if (rows[0].booked_seats == 0) {
+                            total_seats = seats;
+                            available_seats = seats;
+                        } else if (seats >= rows[0].booked_seats, 10) {
+                            total_seats = seats;
+                            available_seats = seats - rows[0].booked_seats;
+                        }
                         sql = "UPDATE events SET title = ?, description = ?, date = ?, total_seats = ?, available_seats = ? WHERE id = ? AND created_by = (SELECT id FROM users WHERE email = ? AND role = 'admin')";
                         values = [title, description, date, total_seats, available_seats, id, email];
 
@@ -130,8 +134,6 @@ class EventController {
                             }
                             conn.end();
                         });
-                    } else {
-                        res.status(422).send({ "error": { "message": "Total seats less than already booked seats." } });
                     }
                 }
             });

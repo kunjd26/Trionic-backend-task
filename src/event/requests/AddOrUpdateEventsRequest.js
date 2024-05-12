@@ -19,7 +19,7 @@ const schema = Joi.object({
         "number.min": "Seat must be at least 1.",
         "number.max": "Seat must be at most 100."
     }),
-});
+}).unknown(true);
 
 export default function addOrUpdateEventsRequest(req, res, next) {
 

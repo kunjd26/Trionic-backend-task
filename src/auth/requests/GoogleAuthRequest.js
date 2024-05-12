@@ -8,7 +8,7 @@ const schema = Joi.object({
     name: Joi.string().required().messages({
         "any.required": "Name is required."
     })
-});
+}).unknown(true);
 
 export default function googleAuthRequest(req, res, next) {
 

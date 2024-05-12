@@ -71,16 +71,17 @@ app.get('/google-auth/callback/success', async (req, res) => {
 
     const result = await response.json();
 
-    if (result.error) {
+    if (!result.error) {
+        // Generate express session
+        req.session.user = {
+            email: req.user.email,
+            role: "normal",
+            token: result.data.token
+        }
+        res.redirect('/');
+    } else {
         console.log(result.error);
     }
-
-    // Generate express session
-    req.session.user = {
-        email: req.user.email,
-        role: "normal"
-    };
-    res.redirect('/');
 });
 
 // failure 

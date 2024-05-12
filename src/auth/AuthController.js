@@ -73,8 +73,7 @@ class AuthController {
                     });
 
                     let jwt = generateJWT(rows[0]);
-                    res.setHeader("Authorization", `Bearer ${jwt}`);
-                    res.status(200).send({ "data": { "message": "User sign-in successfully." } });
+                    res.status(200).send({ "data": { "message": "User sign-in successfully.", "token": jwt } });
                 }
                 conn.end();
             });
@@ -110,8 +109,7 @@ class AuthController {
                     });
                 }
                 let jwt = generateJWT(rows[0]);
-                res.setHeader("Authorization", `Bearer ${jwt}`);
-                res.status(200).send({ "data": { "message": "User sign-in with google successfully." } });
+                res.status(200).send({ "data": { "message": "User sign-in with google successfully.", "token": jwt } });
                 conn.end();
             });
         } catch (error) {

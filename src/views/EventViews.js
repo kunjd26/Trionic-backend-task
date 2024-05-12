@@ -15,20 +15,22 @@ router.route("/events/show").get(async function (req, res) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: req.session.user.email
+                email: req.session.user.email,
+                token: req.session.user.token
             }),
             mode: 'cors'
         });
 
         const result = await response.json();
 
-        if (result.error) {
+        if (!result.error) {
+            res.render("a-show-events", {
+                email: req.session.user.email,
+                events: result.data
+            });
+        } else {
             console.log(result.error);
         }
-        res.render("a-show-events", {
-            email: req.session.user.email,
-            events: result.data
-        });
     }
 });
 
@@ -39,7 +41,8 @@ router.route("/events/add").get(function (req, res) {
         res.redirect('/');
     } else if (req.session.user.role === 'admin') {
         res.render("a-add-events", {
-            email: req.session.user.email
+            email: req.session.user.email,
+            token: req.session.user.token
         });
     }
 });
@@ -51,7 +54,8 @@ router.route("/events/update").get(function (req, res) {
         res.redirect('/');
     } else if (req.session.user.role === 'admin') {
         res.render("a-update-events", {
-            email: req.session.user.email
+            email: req.session.user.email,
+            token: req.session.user.token
         });
     }
 });
@@ -63,7 +67,8 @@ router.route("/events/delete").get(function (req, res) {
         res.redirect('/');
     } else if (req.session.user.role === 'admin') {
         res.render("a-delete-events", {
-            email: req.session.user.email
+            email: req.session.user.email,
+            token: req.session.user.token
         });
     }
 });

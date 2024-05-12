@@ -4,19 +4,10 @@ import "dotenv/config";
 export default function verifyJWT(req, res, next) {
     try {
 
-        const token = req.header("Authorization").split(" ")[1];
+        const token = req.body.token;
 
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         if (verified) {
-
-            // Put token in response header
-            res.header("Authorization", `Bearer ${token}`);
-
-            // Decode the token to get the payload
-            const payload = jwt.decode(token);
-
-            req.body.id = payload.id
-
             next();
         } else {
             res.status(401).send({ "error": { "message": "Invalid token." } });

@@ -11,7 +11,7 @@ const schema = Joi.object({
     role: Joi.string().required().messages({
         "any.required": "Role is required."
     })
-});
+}).unknown(true);
 
 export default function validateSigninRequest(req, res, next) {
 

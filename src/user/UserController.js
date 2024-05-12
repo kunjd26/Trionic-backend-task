@@ -8,7 +8,7 @@ class UserController {
         try {
             const { email } = req.body;
 
-            let sql = "SELECT events.id AS id, title, description, date, available_seats FROM events WHERE is_deleted = 0 AND available_seats > 0 AND date >= CURDATE()";
+            let sql = "SELECT events.id AS id, title, description, date, available_seats, total_seats FROM events WHERE is_deleted = 0 AND available_seats > 0 AND date >= CURDATE()";
             let values = [email];
 
             const conn = mysql.createConnection(connection);
