@@ -27,6 +27,9 @@
     <script>
         async function signin(event) {
             event.preventDefault();
+
+            document.getElementById('error-message').innerText = "";
+
             let form = event.target;
             let formData = new FormData(form);
 

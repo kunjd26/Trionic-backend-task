@@ -56,6 +56,9 @@
         async function handleSubmit(event) {
             event.preventDefault();
 
+            document.getElementById('error-message').innerText = "";
+            document.getElementById('success-message').innerText = "";
+
             let id = document.getElementById('id').value;
             let confirm = document.getElementById('confirm').value.toLowerCase();
 
@@ -74,13 +77,9 @@
                 const result = await response.json();
 
                 if (result.error) {
-                    console.log(result.error);
-                }
-
-                if (result.error) {
                     document.getElementById('error-message').innerText = result.error.message;
                 } else {
-                    document.getElementById('success-message').innerText = "Event deleted successfully.";
+                    document.getElementById('success-message').innerText = result.data.message;
                 }
             } else {
                 document.getElementById('error-message').innerText = "Type confirm to delete event.";

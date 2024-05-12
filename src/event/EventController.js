@@ -83,7 +83,7 @@ class EventController {
                         console.log(error);
                         res.status(500).send({ "error": { "message": "Internal server error." } });
                     } else {
-                        res.status(200).send({ "data": { "messages": "Event created successfully." } });
+                        res.status(200).send({ "data": { "message": "Event created successfully." } });
                     }
                 });
                 conn.end();
@@ -100,21 +100,41 @@ class EventController {
             const { email, title, description, date, seats } = req.body;
             const { id } = req.params;
 
-            let sql = "UPDATE events SET title = ?, description = ?, date = ?, total_seats = ? WHERE id = ? AND created_by = (SELECT id FROM users WHERE email = ? AND role = 'admin')";
-            let values = [title, description, date, seats, id, email];
+            let sql = "SELECT total_seats, available_seats, sum(number_of_seats) AS booked_seats FROM events INNER JOIN user_event ON events.id = user_event.event_id WHERE events.id = ? AND created_by = (SELECT id FROM users WHERE email = ?)"
+            let values = [id, email];
 
             const conn = mysql.createConnection(connection);
 
-            conn.execute(sql, values, (error) => {
+            conn.execute(sql, values, (error, rows) => {
                 if (error) {
                     console.log(error);
                     res.status(500).send({ "error": { "message": "Internal server error." } });
                 } else {
-                    res.status(200).send({ "data": { "messages": "Event updated successfully." } });
-                }
-                conn.end();
-            });
+                    let total_seats, available_seats;
+                    if (rows[0].booked_seats == 0) {
+                        total_seats = seats;
+                        available_seats = seats;
+                    } else if (seats >= parseInt(rows[0].booked_seats, 10)) {
+                        total_seats = seats;
+                        available_seats = seats - rows[0].booked_seats;
 
+                        sql = "UPDATE events SET title = ?, description = ?, date = ?, total_seats = ?, available_seats = ? WHERE id = ? AND created_by = (SELECT id FROM users WHERE email = ? AND role = 'admin')";
+                        values = [title, description, date, total_seats, available_seats, id, email];
+
+                        conn.execute(sql, values, (error) => {
+                            if (error) {
+                                console.log(error);
+                                res.status(500).send({ "error": { "message": "Internal server error." } });
+                            } else {
+                                res.status(200).send({ "data": { "message": "Event updated successfully." } });
+                            }
+                            conn.end();
+                        });
+                    } else {
+                        res.status(422).send({ "error": { "message": "Total seats less than already booked seats." } });
+                    }
+                }
+            });
         } catch (error) {
             console.log(error);
             res.status(500).send({ "error": { "message": "Internal server error." } });
@@ -131,12 +151,14 @@ class EventController {
 
             const conn = mysql.createConnection(connection);
 
-            conn.execute(sql, values, (error) => {
+            conn.execute(sql, values, (error, rows) => {
                 if (error) {
                     console.log(error);
                     res.status(500).send({ "error": { "message": "Internal server error." } });
+                } else if (rows.affectedRows == 0) {
+                    res.status(404).send({ "error": { "message": "Event not found." } });
                 } else {
-                    res.status(200).send({ "data": { "messages": "Event deleted successfully." } });
+                    res.status(200).send({ "data": { "message": "Event deleted successfully." } });
                 }
                 conn.end();
             });

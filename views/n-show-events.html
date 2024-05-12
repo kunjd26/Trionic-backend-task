@@ -51,8 +51,6 @@
                         <span id="eventId<%= event.id %>">
                             <%= event.id %>
                         </span>
-                        <img src="copy-icon.png" alt="Copy" style="cursor: pointer;"
-                            onclick="copyToClipboard('<%= event.id %>')">
                     </p>
                     <p style="color: #666;">
                         Event Seats: <%= event.total_seats %><br>
@@ -75,17 +73,12 @@
 
     </div>
     <script>
-        function copyToClipboard(id) {
-            var range = document.createRange();
-            range.selectNode(document.getElementById('eventId' + id));
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-            window.getSelection().removeAllRanges();
-        }
 
         async function bookEvent(event, id) {
             event.preventDefault();
+            document.getElementById('error-message').innerText = ""
+            document.getElementById('success-message').innerText = "";
+
             let bookingSeats = document.getElementById('bookingSeats' + id).value;
 
             const response = await fetch(`/api/users/events/book`, {
@@ -105,10 +98,8 @@
 
             if (result.error) {
                 document.getElementById('error-message').innerText = result.error.message;
-                document.getElementById('success-message').innerText = "";
             } else {
-                document.getElementById('success-message').innerText = "Event booked successfully.";
-                document.getElementById('error-message').innerText = ""
+                document.getElementById('success-message').innerText = result.data.message;
             }
         }
     </script>
