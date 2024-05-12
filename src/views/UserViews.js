@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.route("/users/events/show").get(async function (req, res) {
+router.route("/events/show").get(async function (req, res) {
     if (!req.session.user) {
         res.redirect('/sign-in');
     } else if (req.session.user.role === 'admin') {
@@ -32,7 +32,7 @@ router.route("/users/events/show").get(async function (req, res) {
     }
 });
 
-router.route("/users/events/history").get(async function (req, res) {
+router.route("/events/history").get(async function (req, res) {
     if (!req.session.user) {
         res.redirect('/sign-in');
     } else if (req.session.user.role === 'admin') {

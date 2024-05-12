@@ -11,7 +11,7 @@ import './passport.js';
 import cors from 'cors';
 
 import authRoute from "./src/auth/AuthRoute.js";
-import viewsRoute from "./src/views/views.js";
+import viewsRoute from "./src/views/ViewsRouter.js";
 import eventRoute from "./src/event/EventRoute.js";
 import userRoute from "./src/user/UserRoute.js";
 

@@ -29,10 +29,10 @@
 
 <body>
     <div class="navbar">
-        <a href="/events/show">Show Events</a>
-        <a href="/events/add">Create Event</a>
-        <a href="/events/update">Update Event</a>
-        <a href="/events/delete">Delete Event</a>
+        <a href="/admin/events/show">Show Events</a>
+        <a href="/admin/events/add">Create Event</a>
+        <a href="/admin/events/update">Update Event</a>
+        <a href="/admin/events/delete">Delete Event</a>
         <a href="/sign-out">Sign out</a>
     </div>
 
@@ -51,8 +51,6 @@
                         <span id="eventId<%= event.id %>">
                             <%= event.id %>
                         </span>
-                        <img src="copy-icon.png" alt="Copy" style="cursor: pointer;"
-                            onclick="copyToClipboard('<%= event.id %>')">
                     </p>
                     <p style="color: #666;">
                         Event Seats: <%= event.total_seats %><br>
@@ -67,16 +65,6 @@
                         <% } %>
 
     </div>
-    <script>
-        function copyToClipboard(id) {
-            var range = document.createRange();
-            range.selectNode(document.getElementById('eventId' + id));
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-            window.getSelection().removeAllRanges();
-        }
-    </script>
 </body>
 
 </html>

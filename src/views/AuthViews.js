@@ -34,7 +34,7 @@ router.route("/sign-out").get(function (req, res) {
     res.redirect('/sign-in');
 });
 
-router.route("/admin-sign-in").get(function (req, res) {
+router.route("/admin/sign-in").get(function (req, res) {
     if (!req.session.user) {
         res.render("a-sign-in");
     } else {
@@ -42,7 +42,7 @@ router.route("/admin-sign-in").get(function (req, res) {
     }
 });
 
-router.route("/admin-sign-in").post(function (req, res) {
+router.route("/admin/sign-in").post(function (req, res) {
     // Generate express session
     req.session.user = {
         email: req.body.email,
