@@ -16,7 +16,7 @@ export default function checkEmailExists(req, res, next) {
                 console.log(error);
                 res.status(500).send({ "error": { "message": "Internal server error." } });
             } else if (results[0].row_count > 0) {
-                res.status(422).send({ "error": { "message": "Email already exists." } });
+                res.status(422).send({ "error": { "message": "Email id already exists." } });
             } else {
                 next();
             }

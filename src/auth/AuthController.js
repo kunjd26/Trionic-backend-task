@@ -3,7 +3,8 @@ import connection from "./../../db.config.js";
 import crypto from "crypto";
 import "dotenv/config";
 import generateJWT from "./services/GenerateJWT.js";
-
+import sendOTPEmail from "./services/SendOTPEmail.js";
+import { send } from "process";
 class AuthController {
     signup(req, res) {
         try {
@@ -112,6 +113,55 @@ class AuthController {
                 res.status(200).send({ "data": { "message": "User sign-in with google successfully.", "token": jwt } });
                 conn.end();
             });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ "error": { "message": "Internal server error." } });
+        }
+    }
+
+    forgotPassword(req, res) {
+        try {
+
+            const { email } = req.body;
+
+            let otp = Math.floor(100000 + Math.random() * 900000);
+
+            sendOTPEmail(email, otp, function (result) {
+                if (result) {
+                    res.status(200).send({ "data": { "message": "OTP sent successfully.", "otp": otp } });
+                } else {
+                    res.status(502).send({ "error": { "message": "There was an error while trying to send the OTP email. Please try again later." } });
+                }
+            });
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ "error": { "message": "Internal server error." } });
+        }
+    }
+
+    resetPassword(req, res) {
+        try {
+            const { email, password } = req.body;
+
+            // hash the password here.
+            let hashPassword = crypto.pbkdf2Sync(password, process.env.PASSWORD_SALT, 1000, 64, `sha512`).toString('hex');
+
+            let sql = "UPDATE users SET password = ? WHERE email = ?";
+            let values = [hashPassword, email];
+
+            const conn = mysql.createConnection(connection);
+
+            conn.execute(sql, values, (error) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).send({ "error": { "message": "Internal server error." } });
+                } else {
+                    res.status(200).send({ "data": { "message": "Password reset successfully." } });
+                }
+                conn.end();
+            });
+
         } catch (error) {
             console.log(error);
             res.status(500).send({ "error": { "message": "Internal server error." } });
