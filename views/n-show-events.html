@@ -29,10 +29,8 @@
 
 <body>
     <div class="navbar">
-        <a href="/events/show">Show Events</a>
-        <a href="/events/add">Create Event</a>
-        <a href="/events/update">Update Event</a>
-        <a href="/events/delete">Delete Event</a>
+        <a href="/users/events/show">Show Events</a>
+        <a href="/users/events/history">Show History</a>
         <a href="/sign-out">Sign out</a>
     </div>
 
@@ -40,6 +38,8 @@
     <p>
         <%= email %>
     </p>
+    <p id="error-message" style="color: red;"></p>
+    <p id="success-message" style="color: green;"></p>
     <div style="font-family: Arial, sans-serif; width: 50%;">
 
         <% if(events.length> 0) { %>
@@ -60,6 +60,13 @@
                                 Event Description: <%= event.description %><br>
                                     Event Date: <%= event.date.split('T')[0] %><br>
                     </p>
+                    <form onsubmit="bookEvent(event, '<%= event.id %>')">
+                        <input type="number" id="bookingSeats<%= event.id %>" max="<%= event.available_seats %>" min="1"
+                            style="margin-bottom: 15px; width: 25%; padding: 10px;" required>
+                        <button
+                            style="background-color: #4CAF50; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Book
+                            Event</button>
+                    </form>
                 </div>
                 <% }); %>
                     <% } else { %>
@@ -75,6 +82,34 @@
             window.getSelection().addRange(range);
             document.execCommand("copy");
             window.getSelection().removeAllRanges();
+        }
+
+        async function bookEvent(event, id) {
+            event.preventDefault();
+            let bookingSeats = document.getElementById('bookingSeats' + id).value;
+
+            const response = await fetch(`/api/users/events/book`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: '<%= email %>',
+                    id: id,
+                    seats: bookingSeats
+                }),
+                mode: 'cors'
+            });
+
+            const result = await response.json();
+
+            if (result.error) {
+                document.getElementById('error-message').innerText = result.error.message;
+                document.getElementById('success-message').innerText = "";
+            } else {
+                document.getElementById('success-message').innerText = "Event booked successfully.";
+                document.getElementById('error-message').innerText = ""
+            }
         }
     </script>
 </body>

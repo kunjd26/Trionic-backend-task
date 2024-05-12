@@ -5,9 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #4285F4;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #4CAF50;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="navbar">
+        <a href="/users/events/show">Show Events</a>
+        <a href="/users/events/history">Show History</a>
+        <a href="/sign-out">Sign out</a>
+    </div>
     <h1>Normal home</h1>
     <p>
         <%= email %>

@@ -36,7 +36,7 @@ router.route("/sign-out").get(function (req, res) {
 
 router.route("/admin-sign-in").get(function (req, res) {
     if (!req.session.user) {
-        res.render("admin-sign-in");
+        res.render("a-sign-in");
     } else {
         res.redirect('/');
     }
@@ -62,7 +62,7 @@ router.route("/").get(function (req, res) {
             id: req.session.user.id
         });
     } else if (req.session.user.role === 'admin') {
-        res.render("admin-home", {
+        res.render("a-home", {
             email: req.session.user.email,
             id: req.session.user.id
         });
