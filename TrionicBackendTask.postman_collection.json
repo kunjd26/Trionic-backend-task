@@ -1,0 +1,1314 @@
+{
+	"info": {
+		"_postman_id": "2a559638-fff7-4cff-af43-5c1763ede783",
+		"name": "TrionicBackendTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27040755"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign up request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"password\": \"Foo@123\",\r\n    \"confirmPassword\": \"Foo@123\",\r\n    \"name\": \"Foo bar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/auth/sign-up",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"auth",
+								"sign-up"
+							]
+						},
+						"description": "Sign up API endpoint register user in database with its credentials."
+					},
+					"response": [
+						{
+							"name": "Sign up request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"password\": \"Foo@123\",\r\n    \"confirmPassword\": \"Foo@123\",\r\n    \"name\": \"Foo bar\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/auth/sign-up",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"auth",
+										"sign-up"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-PhNFwoGcYFrgE+VmTnsuDw0VAfQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:13:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"User sign-up successfully.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign in request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"password\": \"Foo@123\",\r\n    \"role\": \"normal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/auth/sign-in",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"auth",
+								"sign-in"
+							]
+						},
+						"description": "Sign in API endpoint check user credentials in database, And generate JWT for authorization."
+					},
+					"response": [
+						{
+							"name": "Sign in request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"password\": \"Foo@123\",\r\n    \"role\": \"normal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/auth/sign-in",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"auth",
+										"sign-in"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "249"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f9-Css5pDiY3VzHKZZ5Kwh+IcK1GiI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:39:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"User sign-in successfully.\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjM5OjQ3Ljk3NVoiLCJpYXQiOjE3MTU1ODU5ODd9.br5yCtqa0uF4Lz8ltUqL-AmhY_mfd-dKdT6f7MEsZKI\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Google auth request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Foo bar\",\r\n    \"email\": \"foo@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/auth/google-auth",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"auth",
+								"google-auth"
+							]
+						},
+						"description": "Google auth API endpoint check user in database if not exists than register, And generate JWT for authorization."
+					},
+					"response": [
+						{
+							"name": "Google auth request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Foo bar\",\r\n    \"email\": \"foo@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/auth/google-auth",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"auth",
+										"google-auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fd-tbYpTt1LOjgKlf/IiHUEJwgswtg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:15:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"User sign-in with google successfully.\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6bnVsbCwiZW1haWwiOm51bGwsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE1OjUzLjg1MFoiLCJpYXQiOjE3MTU1ODQ1NTN9.ImxAQ8j_PO2FESPNLLHQXDP9LFN6lnSU8w3_hqExbHo\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/auth/forgot-password",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						},
+						"description": "Send OTP API endpoint send one time passcode to given email."
+					},
+					"response": [
+						{
+							"name": "Send otp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/auth/forgot-password",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a-DRA7n00oY82I9v99trkhVfKq0+8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"OTP sent successfully.\",\n        \"otp\": 348072\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"password\": \"Foo@123\",\r\n    \"confirmPassword\": \"Foo@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/auth/reset-password",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						},
+						"description": "Reset password API endpoint update password of particular user (given email) in database."
+					},
+					"response": [
+						{
+							"name": "Reset password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"password\": \"Foo@123\",\r\n    \"confirmPassword\": \"Foo@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/auth/reset-password",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-lnucGQp2hz7yLnxXd8q/Zu4f//M\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:17:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"Password reset successfully.\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Auth folder containe APIs related to authentication."
+		},
+		{
+			"name": "Admin User",
+			"item": [
+				{
+					"name": "Show events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/events/show",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"events",
+								"show"
+							]
+						},
+						"description": "Show events API endpoint list all events created by particular admin (given email)."
+					},
+					"response": [
+						{
+							"name": "Show events",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/events/show",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"events",
+										"show"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "143"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8f-SbzgWoLrzNNmHEcqywHIOLi2EuE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:26:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Title foo\",\n            \"description\": \"Description foo\",\n            \"date\": \"2024-05-14T18:30:00.000Z\",\n            \"total_seats\": 45,\n            \"available_seats\": 45\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Show one events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/events/show/1",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"events",
+								"show",
+								"1"
+							]
+						},
+						"description": "Show one events API endpoint list particular events created by particular admin (given email)."
+					},
+					"response": [
+						{
+							"name": "Show one events",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/events/show/1",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"events",
+										"show",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9d-FWS04NzwfLC+omIMdrLPeCPqwgo\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:27:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"row_count\": 1,\n            \"id\": 1,\n            \"title\": \"Title foo\",\n            \"description\": \"Description foo\",\n            \"date\": \"2024-05-14T18:30:00.000Z\",\n            \"total_seats\": 45,\n            \"available_seats\": 45\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"title\": \"Title foo\",\r\n    \"description\": \"Description foo\",\r\n    \"date\": \"2024-05-15\",\r\n    \"seats\": 45,\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/events/add",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"events",
+								"add"
+							]
+						},
+						"description": "Add events API endpoint create one events."
+					},
+					"response": [
+						{
+							"name": "Add events",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"title\": \"Title foo\",\r\n    \"description\": \"Description foo\",\r\n    \"date\": \"2024-05-15\",\r\n    \"seats\": 45,\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/events/add",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"events",
+										"add"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-faUrMpO/r5fv/AK7YKok7D0Ne1A\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:26:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"Event created successfully.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update events",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"title\": \"Title foo edited\",\r\n    \"description\": \"Description foo edited\",\r\n    \"date\": \"2024-05-17\",\r\n    \"seats\": 50,\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/events/update/1",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"events",
+								"update",
+								"1"
+							]
+						},
+						"description": "Update events API endpoint udate events details by given id."
+					},
+					"response": [
+						{
+							"name": "Update events",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"title\": \"Title foo edited\",\r\n    \"description\": \"Description foo edited\",\r\n    \"date\": \"2024-05-17\",\r\n    \"seats\": 50,\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/events/update/1",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"events",
+										"update",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-faowJ+qj1qp0g+hIGHsLyuZfXi0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:28:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"Event updated successfully.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete events",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/events/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"events",
+								"delete",
+								"1"
+							]
+						},
+						"description": "Delete events API endpoint delete events details by given id."
+					},
+					"response": [
+						{
+							"name": "Delete events",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBmb28uZm9vIiwiZGF0ZSI6IjIwMjQtMDUtMTNUMDc6MjM6MTcuMTI3WiIsImlhdCI6MTcxNTU4NDk5N30.G8uLUTLt-GCPmj_Be3W6rXk8pwRVE2TPQ5U1HBtkqtQ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/events/delete/1",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"events",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-jLO0xEBAoXRue4Ad4E2VffZHZkA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:31:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"Event deleted successfully.\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Admin folder containe APIs related to CRUD operation on events."
+		},
+		{
+			"name": "Normal User",
+			"item": [
+				{
+					"name": "Show events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE0OjU2Ljk3MFoiLCJpYXQiOjE3MTU1ODQ0OTZ9.otbnmN0JfwmiAfGAXGrO3oVxYk0ZyS13oS2q6Et98Js\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/users/events/show",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"users",
+								"events",
+								"show"
+							]
+						},
+						"description": "Show events API endpoint list all events to normal user that has avaliable seats more than 1 and event date in not in past."
+					},
+					"response": [
+						{
+							"name": "Show events",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE0OjU2Ljk3MFoiLCJpYXQiOjE3MTU1ODQ0OTZ9.otbnmN0JfwmiAfGAXGrO3oVxYk0ZyS13oS2q6Et98Js\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/users/events/show",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"users",
+										"events",
+										"show"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "157"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9d-aijyOnjbHrP1YhcD+a+u0QOwCpI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:29:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Title foo edited\",\n            \"description\": \"Description foo edited\",\n            \"date\": \"2024-05-16T18:30:00.000Z\",\n            \"available_seats\": 50,\n            \"total_seats\": 50\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Book events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"id\": \"1\",\r\n    \"seats\": \"12\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE0OjU2Ljk3MFoiLCJpYXQiOjE3MTU1ODQ0OTZ9.otbnmN0JfwmiAfGAXGrO3oVxYk0ZyS13oS2q6Et98Js\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/users/events/book",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"users",
+								"events",
+								"book"
+							]
+						},
+						"description": "Book events API endpoint store booked seats by particular user on given event id."
+					},
+					"response": [
+						{
+							"name": "Book events",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"id\": \"1\",\r\n    \"seats\": \"12\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE0OjU2Ljk3MFoiLCJpYXQiOjE3MTU1ODQ0OTZ9.otbnmN0JfwmiAfGAXGrO3oVxYk0ZyS13oS2q6Et98Js\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/users/events/book",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"users",
+										"events",
+										"book"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-UFEwurxcEl6KIbHDyUMRWpykqf8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:30:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"message\": \"Booking successful.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Events history",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE0OjU2Ljk3MFoiLCJpYXQiOjE3MTU1ODQ0OTZ9.otbnmN0JfwmiAfGAXGrO3oVxYk0ZyS13oS2q6Et98Js\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:65535/api/users/events/history",
+							"host": [
+								"localhost"
+							],
+							"port": "65535",
+							"path": [
+								"api",
+								"users",
+								"events",
+								"history"
+							]
+						},
+						"description": "History events API endpoint list all events where particular user booked some seats."
+					},
+					"response": [
+						{
+							"name": "Events history",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"foo@foo.foo\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJmb29AZm9vLmZvbyIsImRhdGUiOiIyMDI0LTA1LTEzVDA3OjE0OjU2Ljk3MFoiLCJpYXQiOjE3MTU1ODQ0OTZ9.otbnmN0JfwmiAfGAXGrO3oVxYk0ZyS13oS2q6Et98Js\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:65535/api/users/events/history",
+									"host": [
+										"localhost"
+									],
+									"port": "65535",
+									"path": [
+										"api",
+										"users",
+										"events",
+										"history"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "140"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8c-21R0jjqVTPQ1QHlE3KoKyO/a39g\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 07:30:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Title foo edited\",\n            \"description\": \"Description foo edited\",\n            \"date\": \"2024-05-16T18:30:00.000Z\",\n            \"number_of_seats\": 12\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Normal user folder containe APIs related to event booking and event history for normal users."
+		}
+	]
+}
