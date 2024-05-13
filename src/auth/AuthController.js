@@ -4,7 +4,7 @@ import crypto from "crypto";
 import "dotenv/config";
 import generateJWT from "./services/GenerateJWT.js";
 import sendOTPEmail from "./services/SendOTPEmail.js";
-import { send } from "process";
+
 class AuthController {
     signup(req, res) {
         try {

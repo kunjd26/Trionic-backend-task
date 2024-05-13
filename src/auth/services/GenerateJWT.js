@@ -5,7 +5,6 @@ export default function generateJWT(user) {
 
     try {
         const payload = {
-            id: user.id,
             email: user.email,
             date: new Date(),
         };
