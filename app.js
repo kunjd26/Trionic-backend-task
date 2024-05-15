@@ -10,13 +10,14 @@ import cookieSession from 'cookie-session';
 import './passport.js';
 import cors from 'cors';
 
+// Local imports.
 import authRoute from "./src/auth/AuthRoute.js";
 import viewsRoute from "./src/views/ViewsRouter.js";
 import eventRoute from "./src/event/EventRoute.js";
 import userRoute from "./src/user/UserRoute.js";
 
+// Initialize.
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 export const app = express();
 
 // Global middlewares
@@ -89,7 +90,7 @@ app.get('/google-auth/callback/failure', (req, res) => {
     res.send("Error");
 });
 
-
+// Define routes.
 app.use("/", viewsRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/events", eventRoute);

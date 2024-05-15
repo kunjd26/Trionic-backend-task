@@ -6,11 +6,12 @@ import generateJWT from "./services/GenerateJWT.js";
 import sendOTPEmail from "./services/SendOTPEmail.js";
 
 class AuthController {
+
     signup(req, res) {
         try {
             const { name, email, password } = req.body;
 
-            // hash the password here.
+            // Hash the password here.
             let hashPassword = crypto.pbkdf2Sync(password, process.env.PASSWORD_SALT, 1000, 64, `sha512`).toString('hex');
 
             let sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
@@ -38,7 +39,7 @@ class AuthController {
         try {
             const { email, password } = req.body;
 
-            // hash the password here.
+            // Hash the password here.
             let hashPassword = crypto.pbkdf2Sync(password, process.env.PASSWORD_SALT, 1000, 64, `sha512`).toString('hex');
 
             let sql = "SELECT COUNT(*) AS row_count, email, id FROM users WHERE email = ? AND password = ?";
@@ -51,7 +52,7 @@ class AuthController {
                     console.log(error);
                     res.status(500).send({ "error": { "message": "Internal server error." } });
                 } else if (rows[0].row_count == 0) {
-
+                    // If the password is incorrect, decrement the rate limit.
                     sql = "UPDATE users SET rate_limit = rate_limit - 1 WHERE email = ? AND rate_limit > 0";
                     values = [email];
 
@@ -61,8 +62,10 @@ class AuthController {
                             res.status(500).send({ "error": { "message": "Internal server error." } });
                         }
                     });
+
                     res.status(401).send({ "error": { "message": "Password incorrect." } });
                 } else {
+                    // If the password is correct than, reset the rate limit.
                     sql = "UPDATE users SET rate_limit = 5 WHERE email = ?";
                     values = [email];
 
@@ -71,12 +74,13 @@ class AuthController {
                             console.log(error);
                             res.status(500).send({ "error": { "message": "Internal server error." } });
                         }
+                        conn.end();
                     });
 
+                    // Generate JWT token.
                     let jwt = generateJWT(rows[0]);
                     res.status(200).send({ "data": { "message": "User sign-in successfully.", "token": jwt } });
                 }
-                conn.end();
             });
 
         } catch (error) {
@@ -99,6 +103,7 @@ class AuthController {
                     console.log(error);
                     res.status(500).send({ "error": { "message": "Internal server error." } });
                 } else if (rows[0].row_count == 0) {
+                    // If the user do first time continue with google.
                     sql = "INSERT INTO users (name, email, third_party) VALUES (?, ?, ?)";
                     values = [name, email, 1];
 
@@ -107,12 +112,15 @@ class AuthController {
                             console.log(error);
                             res.status(500).send({ "error": { "message": "Internal server error." } });
                         }
+                        conn.end();
                     });
                 }
+
+                // Generate JWT token.
                 let jwt = generateJWT(rows[0]);
                 res.status(200).send({ "data": { "message": "User sign-in with google successfully.", "token": jwt } });
-                conn.end();
             });
+
         } catch (error) {
             console.log(error);
             res.status(500).send({ "error": { "message": "Internal server error." } });
@@ -121,9 +129,9 @@ class AuthController {
 
     forgotPassword(req, res) {
         try {
-
             const { email } = req.body;
 
+            // Generate 6 digit OTP.
             let otp = Math.floor(100000 + Math.random() * 900000);
 
             sendOTPEmail(email, otp, function (result) {
@@ -144,7 +152,7 @@ class AuthController {
         try {
             const { email, password } = req.body;
 
-            // hash the password here.
+            // Hash the password here.
             let hashPassword = crypto.pbkdf2Sync(password, process.env.PASSWORD_SALT, 1000, 64, `sha512`).toString('hex');
 
             let sql = "UPDATE users SET password = ? WHERE email = ?";

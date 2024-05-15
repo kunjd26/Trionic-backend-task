@@ -110,18 +110,26 @@ class EventController {
                     console.log(error);
                     res.status(500).send({ "error": { "message": "Internal server error." } });
                 } else {
+                    // If 0 seats are booked, then booked_seats will be null. So, we need to convert it to 0.
                     rows[0].booked_seats = rows[0].booked_seats ? parseInt(rows[0].booked_seats, 10) : 0;
+
+                    // If new updated total seats are less than already booked seats, then return error.
                     if (seats < rows[0].booked_seats) {
                         res.status(422).send({ "error": { "message": "Total seats less than already booked seats." } });
                     } else {
                         let total_seats, available_seats;
+
+                        // If no seats are booked, then new updated total seats are set to both total seats and available seats.
                         if (rows[0].booked_seats == 0) {
                             total_seats = seats;
                             available_seats = seats;
+
+                            // If some seats are booked, then new updated total seats are set to total seats and available seats are set to total seats - booked seats.
                         } else if (seats >= rows[0].booked_seats, 10) {
                             total_seats = seats;
                             available_seats = seats - rows[0].booked_seats;
                         }
+
                         sql = "UPDATE events SET title = ?, description = ?, date = ?, total_seats = ?, available_seats = ? WHERE id = ? AND created_by = (SELECT id FROM users WHERE email = ? AND role = 'admin')";
                         values = [title, description, date, total_seats, available_seats, id, email];
 
@@ -137,6 +145,7 @@ class EventController {
                     }
                 }
             });
+
         } catch (error) {
             console.log(error);
             res.status(500).send({ "error": { "message": "Internal server error." } });

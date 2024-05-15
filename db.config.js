@@ -1,5 +1,6 @@
 import "dotenv/config";
 
+// Database connection configuration.
 const connection = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,

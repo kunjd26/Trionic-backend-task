@@ -5,7 +5,7 @@ export default function checkUserRole(req, res, next) {
     try {
         const { email } = req.body;
 
-        // First, check if the email already exists
+        // Check role in request body and compare it with the role in the database.
         let sql = "SELECT role FROM users WHERE email = ?";
         let values = [email];
 

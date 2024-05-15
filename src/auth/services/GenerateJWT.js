@@ -9,6 +9,7 @@ export default function generateJWT(user) {
             date: new Date(),
         };
         return jwt.sign(payload, process.env.JWT_SECRET);
+
     } catch (error) {
         console.log(error);
     }

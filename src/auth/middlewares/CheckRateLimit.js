@@ -5,6 +5,7 @@ export default function checkRateLimit(req, res, next) {
     try {
         const { email } = req.body;
 
+        // If rate limit is 0 than send an error message.
         let sql = "SELECT count(*) AS row_count FROM users WHERE email = ? AND rate_limit > 0";
         let values = [email];
 

@@ -5,7 +5,7 @@ export default function checkEmailExists(req, res, next) {
     try {
         const { email } = req.body;
 
-        // First, check if the email already exists
+        // Check if the email already exists.
         let sql = "SELECT count(*) AS row_count FROM users WHERE email = ?";
         let values = [email];
 
